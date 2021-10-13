@@ -7,23 +7,21 @@ import Chevron from './Chevron';
 export default function Carousel({ toDetail }) {
 	const fetchUrl = `https://api.rawg.io/api/games?&dates=2021-01-01,2021-10-01&page_size=3&ordering=-metacritic&key=`;
 	const { data, loading } = useFetch(fetchUrl);
-	const [current, setCurrent] = useState(0);
+	const [currentSlide, setCurrentSlide] = useState(0);
 
 	useEffect(() => {
-		let isMounted = true;
+		let interval;
 
 		if (data?.results.length > 0) {
-			setInterval(() => {
-				if (isMounted) {
-					setCurrent((current) =>
-						current === data?.results.length - 1 ? 0 : current + 1
-					);
-				}
+			interval = setInterval(() => {
+				setCurrentSlide((current) =>
+					current === data?.results.length - 1 ? 0 : current + 1
+				);
 			}, 5000);
 		}
 
 		return () => {
-			isMounted = false;
+			clearInterval(interval);
 		};
 	}, [data?.results.length]);
 
@@ -46,19 +44,19 @@ export default function Carousel({ toDetail }) {
 	};
 
 	const handlePreviousClick = () => {
-		setCurrent((current) =>
+		setCurrentSlide((current) =>
 			current === 0 ? data?.results.length - 1 : current - 1
 		);
 	};
 
 	const handleNextClick = () => {
-		setCurrent((current) =>
+		setCurrentSlide((current) =>
 			current === data?.results.length - 1 ? 0 : current + 1
 		);
 	};
 
 	const handleDotClick = (carouselStep) => {
-		setCurrent(carouselStep);
+		setCurrentSlide(carouselStep);
 	};
 
 	return (
@@ -75,16 +73,18 @@ export default function Carousel({ toDetail }) {
 
 					<div
 						className={`${styles.carouselItem} ${styles.fade}`}
-						onClick={() => handleCarouselItemClick(data?.results[current].id)}
+						onClick={() =>
+							handleCarouselItemClick(data?.results[currentSlide].id)
+						}
 					>
-						<h1>{uppercaseTitle(data?.results[current].name)}</h1>
+						<h1>{uppercaseTitle(data?.results[currentSlide].name)}</h1>
 
 						<div className={styles.triangle}></div>
 						<h2>Top Rated </h2>
 
 						<img
-							src={data?.results[current].background_image}
-							alt={uppercaseTitle(data?.results[current].name)}
+							src={data?.results[currentSlide].background_image}
+							alt={uppercaseTitle(data?.results[currentSlide].name)}
 						/>
 					</div>
 
@@ -99,7 +99,7 @@ export default function Carousel({ toDetail }) {
 							return (
 								<span
 									className={
-										styles.dot + (current === i ? ` ${styles.active}` : '')
+										styles.dot + (currentSlide === i ? ` ${styles.active}` : '')
 									}
 									key={`dot${i}`}
 									onClick={() => handleDotClick(i)}
