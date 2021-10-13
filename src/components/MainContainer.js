@@ -41,7 +41,7 @@ export default function MainContainer({ toDetail }) {
 							key={post.id}
 							name={post.name}
 							image={post.background_image}
-							toDetail={() => handleToDetail(post.id)}
+							onClick={() => handleToDetail(post.id)}
 						/>
 					))}
 			</div>
