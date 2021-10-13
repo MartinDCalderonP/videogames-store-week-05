@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styles from '../styles/MainContainer.module.scss';
+import API_KEY from '../Keys';
 import useFetch from '../hooks/useFetch';
 import Spinner from './Spinner';
 import Chevron from './Chevron';
 import Card from './Card';
 
 export default function MainContainer({ toDetail }) {
-	const postsUrl = `https://api.rawg.io/api/games?page_size=8&key=`;
+	const postsUrl = `https://api.rawg.io/api/games?page_size=8&key=${API_KEY}`;
 	const [fetchUrl, setFetchUrl] = useState(postsUrl);
 	const { data, loading } = useFetch(fetchUrl);
 

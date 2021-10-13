@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 
 export default function Comments({ postId }) {
 	const fetchUrl = `https://videogames-store-db.herokuapp.com/comments?postId=${postId}`;
-	const { data, loading, fetchData } = useFetch(fetchUrl, 'db');
+	const { data, loading, fetchData } = useFetch(fetchUrl);
 	const [commentAreaValue, setCommentAreaValue] = useState(undefined);
 
 	const handleCommentAreaValueChange = (e) => {

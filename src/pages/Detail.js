@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from '../styles/Detail.module.scss';
-import { getNamesFromArray } from '../components/Helpers';
+import API_KEY from '../Keys';
 import useFetch from '../hooks/useFetch';
+import { getNamesFromArray } from '../components/Helpers';
 import Spinner from '../components/Spinner';
 import Chevron from '../components/Chevron';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +14,7 @@ import ESRB from '../components/ESRB';
 import Comments from '../components/Comments';
 
 export default function Detail({ postId }) {
-	const fetchUrl = `https://api.rawg.io/api/games/${postId}?key=`;
+	const fetchUrl = `https://api.rawg.io/api/games/${postId}?key=${API_KEY}`;
 	const { data, loading } = useFetch(fetchUrl);
 	const [expandedText, setExpandedText] = useState(false);
 

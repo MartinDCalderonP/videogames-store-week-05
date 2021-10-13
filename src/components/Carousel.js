@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Carousel.module.scss';
-import { uppercaseTitle } from '../components/Helpers';
+import API_KEY from '../Keys';
 import useFetch from '../hooks/useFetch';
+import { uppercaseTitle } from '../components/Helpers';
 import Spinner from './Spinner';
 import Chevron from './Chevron';
 
 export default function Carousel({ toDetail }) {
-	const fetchUrl = `https://api.rawg.io/api/games?&dates=2021-01-01,2021-10-01&page_size=3&ordering=-metacritic&key=`;
+	const fetchUrl = `https://api.rawg.io/api/games?&dates=2021-01-01,2021-10-01&page_size=3&ordering=-metacritic&key=${API_KEY}`;
 	const { data, loading } = useFetch(fetchUrl);
 	const [currentSlide, setCurrentSlide] = useState(0);
 

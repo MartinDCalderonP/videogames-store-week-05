@@ -1,13 +1,8 @@
 import { useState, useEffect } from 'react';
-import API_KEY from '../Keys';
 
-const useFetch = (fetchUrl, db) => {
+const useFetch = (fetchUrl) => {
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(true);
-
-	if (!db) {
-		fetchUrl = fetchUrl + API_KEY;
-	}
 
 	const fetchData = async () => {
 		fetch(fetchUrl)
@@ -15,7 +10,8 @@ const useFetch = (fetchUrl, db) => {
 			.then((result) => {
 				setData(result);
 				setLoading(false);
-			});
+			})
+			.catch((err) => console.log(`${err}. Try again later.`));
 	};
 
 	useEffect(() => {
@@ -25,7 +21,8 @@ const useFetch = (fetchUrl, db) => {
 				.then((result) => {
 					setData(result);
 					setLoading(false);
-				});
+				})
+				.catch((err) => console.log(`${err}. Try again later.`));
 		};
 
 		fetchData();
