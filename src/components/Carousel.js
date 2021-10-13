@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Carousel.module.scss';
+import { uppercaseTitle } from '../components/Helpers';
 import useFetch from '../hooks/useFetch';
 import Spinner from './Spinner';
 import Chevron from './Chevron';
@@ -27,20 +28,6 @@ export default function Carousel({ toDetail }) {
 
 	const handleCarouselItemClick = (postId) => {
 		toDetail(postId);
-	};
-
-	const uppercaseTitle = (title) => {
-		let words = title.toLowerCase().split(' ');
-
-		for (let i = 0; i < words.length; i++) {
-			if (words[i] === '3d' || words[i] === 'vii') {
-				words[i] = words[i].toUpperCase();
-			} else {
-				words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-			}
-		}
-
-		return words.join(' ');
 	};
 
 	const handlePreviousClick = () => {

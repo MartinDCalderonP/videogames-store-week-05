@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/Detail.module.scss';
+import { getNamesFromArray } from '../components/Helpers';
 import useFetch from '../hooks/useFetch';
 import Spinner from '../components/Spinner';
 import Chevron from '../components/Chevron';
@@ -18,14 +19,6 @@ export default function Detail({ postId }) {
 
 	const handleExpandText = () => {
 		setExpandedText(!expandedText);
-	};
-
-	const getNamesFromArray = (array) => {
-		let names = [];
-
-		array?.map((item) => names.push(item.name));
-
-		return names.join(', ');
 	};
 
 	return (
