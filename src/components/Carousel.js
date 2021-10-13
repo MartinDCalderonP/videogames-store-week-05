@@ -57,8 +57,8 @@ export default function Carousel({ toDetail }) {
 		);
 	};
 
-	const handleDotClick = (i) => {
-		setCurrent(i);
+	const handleDotClick = (carouselStep) => {
+		setCurrent(carouselStep);
 	};
 
 	return (
