@@ -83,17 +83,15 @@ export default function Carousel({ toDetail }) {
 					/>
 
 					<div className={styles.dotsContainer}>
-						{data?.results.map((item, i) => {
-							return (
-								<span
-									className={
-										styles.dot + (currentSlide === i ? ` ${styles.active}` : '')
-									}
-									key={`dot${i}`}
-									onClick={() => handleDotClick(i)}
-								/>
-							);
-						})}
+						{data?.results.map((item, i) => (
+							<span
+								className={
+									styles.dot + (currentSlide === i ? ` ${styles.active}` : '')
+								}
+								key={`dot${i}`}
+								onClick={() => handleDotClick(i)}
+							/>
+						))}
 					</div>
 				</div>
 			)}
