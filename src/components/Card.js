@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles/Card.module.scss';
-import gameDefault from '../img/gameDefault.png';
+import defaultImage from '../img/gameDefault.png';
 
 export default function Card({ name, image, onClick }) {
 	return (
@@ -9,7 +9,7 @@ export default function Card({ name, image, onClick }) {
 			<div className={styles.cardImage}>
 				<img
 					className={!image && styles.defaultImage}
-					src={image || gameDefault}
+					src={image || defaultImage}
 					alt={name}
 				/>
 			</div>
