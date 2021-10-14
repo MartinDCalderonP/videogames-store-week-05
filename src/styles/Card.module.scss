@@ -21,13 +21,18 @@
 	}
 
 	.cardImage {
+		display: flex;
+		justify-content: center;
 		width: 100%;
 		height: 75%;
 
 		img {
 			width: 100%;
-			height: 150px;
 			object-fit: cover;
+		}
+
+		.defaultImage {
+			width: 75%;
 		}
 	}
 
