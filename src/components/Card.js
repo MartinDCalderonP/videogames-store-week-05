@@ -8,7 +8,7 @@ export default function Card({ name, image, onClick }) {
 			<p>{name}</p>
 			<div className={styles.cardImage}>
 				<img
-					className={!image && styles.defaultImage}
+					className={!image ? styles.defaultImage : ''}
 					src={image || defaultImage}
 					alt={name}
 				/>
