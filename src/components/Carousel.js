@@ -67,9 +67,6 @@ export default function Carousel({ toDetail }) {
 					>
 						<h1>{uppercaseTitle(data?.results[currentSlide].name)}</h1>
 
-						<div className={styles.triangle}></div>
-						<h2>Top Rated </h2>
-
 						<img
 							src={data?.results[currentSlide].background_image}
 							alt={uppercaseTitle(data?.results[currentSlide].name)}
