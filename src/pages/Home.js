@@ -6,53 +6,31 @@ import CardsContainer from '../components/CardsContainer';
 import PaginationButtons from '../components/PaginationButtons';
 
 export default function Home({ toDetail }) {
-	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games`;
-	const [fetchUrl] = useState(postsUrl);
+	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games?_sort=release_year&_limit=8`;
+	const [fetchUrl, setFetchUrl] = useState(postsUrl);
 	const { data, loading } = useFetch(fetchUrl);
-
-	const carouselPosts = data
-		?.slice(0, 4)
-		.filter((item) => item?.cover_art?.url);
-	const cardsContainerPosts = data?.slice(4);
-
-	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage] = useState(8);
-
-	const indexOfLastPost = currentPage * postsPerPage;
-	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPosts = cardsContainerPosts?.slice(
-		indexOfFirstPost,
-		indexOfLastPost
-	);
 
 	const handleToDetail = (postId) => {
 		toDetail(postId);
 	};
 
 	const paginate = (pageNumber) => {
-		setCurrentPage(pageNumber);
+		setFetchUrl(postsUrl + `&_start=${(pageNumber - 1) * postsPerPage}`);
 	};
 
 	return (
 		<>
-			<Carousel
-				loading={loading}
-				posts={carouselPosts}
-				toDetail={handleToDetail}
-			/>
+			<Carousel toDetail={handleToDetail} />
 
 			<div className={styles.mainContainer}>
 				<CardsContainer
 					loading={loading}
-					posts={currentPosts}
+					posts={data}
 					toDetail={handleToDetail}
 				/>
 
-				<PaginationButtons
-					totalPosts={cardsContainerPosts?.length}
-					postsPerPage={postsPerPage}
-					paginate={paginate}
-				/>
+				<PaginationButtons postsPerPage={postsPerPage} paginate={paginate} />
 			</div>
 		</>
 	);

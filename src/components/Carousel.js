@@ -6,7 +6,7 @@ import Chevron from './Chevron';
 
 export default function Carousel({ toDetail }) {
 	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games?_start=1&_limit=4`;
-	const [fetchUrl, setFetchUrl] = useState(postsUrl);
+	const [fetchUrl] = useState(postsUrl);
 	const { data, loading } = useFetch(fetchUrl);
 	const [currentSlide, setCurrentSlide] = useState(0);
 
