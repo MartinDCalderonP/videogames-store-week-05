@@ -75,15 +75,17 @@ export default function Comments({ postId }) {
 
 				{!loading &&
 					data?.length > 0 &&
-					data?.map((item) => (
-						<div key={`comment${item.id}`}>
-							<p>
-								{`${item.user.firstName} ${item.user.lastName} `}
-								<span>{formatDate(item.created_at)}</span>
-							</p>
-							<p>{item.body}</p>
-						</div>
-					))}
+					data
+						?.map((item) => (
+							<div key={`comment${item.id}`}>
+								<p>
+									{`${item.user.firstName} ${item.user.lastName} `}
+									<span>{formatDate(item.created_at)}</span>
+								</p>
+								<p>{item.body}</p>
+							</div>
+						))
+						.reverse()}
 
 				{!loading && data?.length === 0 && (
 					<h3>There are no comments yet. Be the first!</h3>
