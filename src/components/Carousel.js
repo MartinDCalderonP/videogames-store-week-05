@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Carousel.module.scss';
+import useFetch from '../hooks/useFetch';
 import Spinner from './Spinner';
 import Chevron from './Chevron';
 
-export default function Carousel({ loading, posts, toDetail }) {
+export default function Carousel({ toDetail }) {
+	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games?_start=1&_limit=4`;
+	const [fetchUrl, setFetchUrl] = useState(postsUrl);
+	const { data, loading } = useFetch(fetchUrl);
+
 	const [currentSlide, setCurrentSlide] = useState(0);
 
 	useEffect(() => {
 		let interval;
 
-		if (posts?.length > 0) {
+		if (data?.length > 0) {
 			interval = setInterval(() => {
 				setCurrentSlide((current) =>
-					current === posts?.length - 1 ? 0 : current + 1
+					current === data?.length - 1 ? 0 : current + 1
 				);
 			}, 5000);
 		}
@@ -20,7 +25,7 @@ export default function Carousel({ loading, posts, toDetail }) {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [posts?.length]);
+	}, [data?.length]);
 
 	const handleCarouselItemClick = (postId) => {
 		toDetail(postId);
@@ -28,13 +33,13 @@ export default function Carousel({ loading, posts, toDetail }) {
 
 	const handlePreviousClick = () => {
 		setCurrentSlide((current) =>
-			current === 0 ? posts?.length - 1 : current - 1
+			current === 0 ? data?.length - 1 : current - 1
 		);
 	};
 
 	const handleNextClick = () => {
 		setCurrentSlide((current) =>
-			current === posts?.length - 1 ? 0 : current + 1
+			current === data?.length - 1 ? 0 : current + 1
 		);
 	};
 
@@ -46,7 +51,7 @@ export default function Carousel({ loading, posts, toDetail }) {
 		<>
 			{loading && <Spinner />}
 
-			{!loading && posts && (
+			{!loading && data && (
 				<div className={styles.carousel}>
 					<Chevron
 						className={styles.previous}
@@ -56,13 +61,13 @@ export default function Carousel({ loading, posts, toDetail }) {
 
 					<div
 						className={`${styles.carouselItem} ${styles.fade}`}
-						onClick={() => handleCarouselItemClick(posts[currentSlide]?.id)}
+						onClick={() => handleCarouselItemClick(data[currentSlide]?.id)}
 					>
-						<h1>{posts[currentSlide]?.name}</h1>
+						<h1>{data[currentSlide]?.name}</h1>
 
 						<img
-							src={posts[currentSlide]?.cover_art?.url}
-							alt={posts[currentSlide]?.name}
+							src={data[currentSlide]?.cover_art?.url}
+							alt={data[currentSlide]?.name}
 						/>
 					</div>
 
@@ -73,7 +78,7 @@ export default function Carousel({ loading, posts, toDetail }) {
 					/>
 
 					<div className={styles.dotsContainer}>
-						{posts?.map((item, i) => (
+						{data?.map((item, i) => (
 							<span
 								className={
 									styles.dot + (currentSlide === i ? ` ${styles.active}` : '')
