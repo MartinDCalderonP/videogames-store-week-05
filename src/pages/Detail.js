@@ -8,7 +8,6 @@ import Chevron from '../components/Chevron';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import RatingStars from '../components/RatingStars';
-import MinimumRequirements from '../components/MinimumRequirements';
 import PlatformIcons from '../components/PlatformIcons';
 import ESRB from '../components/ESRB';
 import Comments from '../components/Comments';
@@ -80,8 +79,6 @@ export default function Detail({ postId }) {
 										{getNamesFromArray(data.publishers)}
 									</p>
 								)}
-
-								<MinimumRequirements platforms={data.platforms} />
 
 								<PlatformIcons platforms={data.parent_platforms} />
 
