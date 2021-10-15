@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../styles/Detail.module.scss';
-import API_KEY from '../Keys';
 import useFetch from '../hooks/useFetch';
 import { getNamesFromArray } from '../components/Helpers';
 import Spinner from '../components/Spinner';
-import Chevron from '../components/Chevron';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import RatingStars from '../components/RatingStars';
 import PlatformIcons from '../components/PlatformIcons';
-import ESRB from '../components/ESRB';
 import Comments from '../components/Comments';
 
 export default function Detail({ postId }) {
-	const fetchUrl = `https://api.rawg.io/api/games/${postId}?key=${API_KEY}`;
+	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}`;
 	const { data, loading } = useFetch(fetchUrl);
-	const [expandedText, setExpandedText] = useState(false);
-
-	const handleExpandText = () => {
-		setExpandedText(!expandedText);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -32,45 +21,24 @@ export default function Detail({ postId }) {
 					<div className={styles.row}>
 						<div className={styles.leftColumn}>
 							<div className={styles.image}>
-								<img src={data.background_image} alt={data.name} />
-							</div>
-
-							<div
-								className={`${styles.description} ${
-									!expandedText ? '' : styles.active
-								}`}
-							>
-								<p>{data.description_raw}</p>
-
-								<Chevron
-									className={styles.expandText}
-									onClick={handleExpandText}
-									orientation={!expandedText ? 'down' : 'top'}
-								/>
+								<img src={data.cover_art.url} alt={data.name} />
 							</div>
 						</div>
 
 						<div className={styles.dividerColumn}></div>
 
 						<div className={styles.rightColumn}>
-							<RatingStars rating={data.rating} top={data.rating_top} />
-
 							<div className={styles.information}>
 								<h3>Game Details</h3>
 
 								<p>
 									<b>Title: </b>
-									{data.name_original}
+									{data.name}
 								</p>
 
 								<p>
 									<b>Genre: </b>
-									{getNamesFromArray(data.genres)}
-								</p>
-
-								<p>
-									<b>Developer: </b>
-									{getNamesFromArray(data.developers)}
+									{data.genre.name}
 								</p>
 
 								{data?.publishers.length > 0 && (
@@ -80,14 +48,7 @@ export default function Detail({ postId }) {
 									</p>
 								)}
 
-								<PlatformIcons platforms={data.parent_platforms} />
-
-								<ESRB rating={data.esrb_rating} />
-
-								<a href={data.website}>
-									Official website
-									<FontAwesomeIcon icon={faExternalLinkAlt} />
-								</a>
+								<PlatformIcons platforms={data.platforms} />
 							</div>
 						</div>
 					</div>

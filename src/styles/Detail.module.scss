@@ -35,41 +35,6 @@
 				object-fit: cover;
 			}
 		}
-
-		.description {
-			position: relative;
-			padding: 15px;
-			background: rgba(156, 12, 12, 0.3);
-			height: 110px;
-			transition: all 0.3s ease-in;
-
-			> p {
-				font-size: 1rem;
-				text-align: justify;
-				max-height: 95px;
-				overflow: hidden;
-				transition: all 0.3s ease-in;
-			}
-
-			&.active {
-				height: fit-content;
-				padding-bottom: 30px;
-
-				> p {
-					max-height: none;
-				}
-			}
-
-			.expandText {
-				top: auto;
-				bottom: 0;
-				height: 30px;
-
-				&:hover {
-					background-color: transparent;
-				}
-			}
-		}
 	}
 
 	.dividerColumn {
@@ -94,18 +59,6 @@
 			> p {
 				margin: 5px 0px;
 				color: #a8a8a8;
-			}
-
-			a {
-				display: block;
-				margin-top: 20px;
-				padding: 4px 8px;
-				text-decoration: none;
-				background-color: rgba(0, 0, 139, 0.3);
-
-				> svg {
-					margin-left: 5px;
-				}
 			}
 		}
 	}
