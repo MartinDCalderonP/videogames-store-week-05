@@ -61,7 +61,7 @@ export default function Carousel({ loading, posts, toDetail }) {
 						<h1>{posts[currentSlide]?.name}</h1>
 
 						<img
-							src={posts[currentSlide]?.cover_art?.formats?.large?.url}
+							src={posts[currentSlide]?.cover_art?.url}
 							alt={posts[currentSlide]?.name}
 						/>
 					</div>

@@ -10,10 +10,10 @@ export default function Home({ toDetail }) {
 	const [fetchUrl] = useState(postsUrl);
 	const { data, loading } = useFetch(fetchUrl);
 
-	const cardsContainerPosts = data?.slice(4);
 	const carouselPosts = data
 		?.slice(0, 4)
-		.filter((item) => item?.cover_art?.formats?.large?.url);
+		.filter((item) => item?.cover_art?.url);
+	const cardsContainerPosts = data?.slice(4);
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage] = useState(8);
