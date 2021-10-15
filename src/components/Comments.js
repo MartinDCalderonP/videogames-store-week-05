@@ -3,6 +3,7 @@ import styles from '../styles/Comments.module.scss';
 import useFetch from '../hooks/useFetch';
 import { formatDate } from './Helpers';
 import Spinner from './Spinner';
+import Button from './Button';
 
 export default function Comments({ postId }) {
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
@@ -58,12 +59,7 @@ export default function Comments({ postId }) {
 					onChange={handleCommentAreaValueChange}
 				/>
 
-				<button
-					className={styles.commentButton}
-					onClick={handleCommentButtonClick}
-				>
-					Comentar
-				</button>
+				<Button onClick={handleCommentButtonClick}>Comentar</Button>
 			</div>
 
 			<div className={styles.divider} />
