@@ -16,7 +16,7 @@ export default function CardsContainer({ loading, posts, toDetail }) {
 				posts?.length > 0 &&
 				posts?.map((post) => (
 					<Card
-						key={post.id}
+						key={`card${post.id}`}
 						name={post.name}
 						image={post.cover_art?.formats?.small?.url}
 						onClick={() => handleToDetail(post.id)}
