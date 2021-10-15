@@ -14,6 +14,36 @@
 			left: 20px;
 		}
 
+		> .triangle {
+			position: absolute;
+			right: 0;
+			width: 0;
+			height: 0;
+			border-top: 130px solid orange;
+			border-left: 130px solid transparent;
+
+			@media (max-width: 599px) {
+				bottom: 4px;
+				border-top: none;
+				border-bottom: 130px solid orange;
+			}
+		}
+
+		> h2 {
+			position: absolute;
+			top: 35px;
+			right: 0;
+			color: darkblue;
+			transform: rotate(45deg);
+			user-select: none;
+
+			@media (max-width: 599px) {
+				top: auto;
+				bottom: 35px;
+				transform: rotate(315deg);
+			}
+		}
+
 		> img {
 			width: 100%;
 			height: 70vh;

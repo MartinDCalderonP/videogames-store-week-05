@@ -65,6 +65,9 @@ export default function Carousel({ toDetail }) {
 					>
 						<h1>{data[currentSlide]?.name}</h1>
 
+						<div className={styles.triangle}></div>
+						<h2>Top Rated </h2>
+
 						<img
 							src={data[currentSlide]?.cover_art?.url}
 							alt={data[currentSlide]?.name}
