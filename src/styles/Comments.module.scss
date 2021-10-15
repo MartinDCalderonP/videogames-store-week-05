@@ -16,7 +16,7 @@
 		background-color: var(--backgroundColor);
 
 		&:hover {
-			background-color: rgba(0, 0, 0, 0.3);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 		}
 
 		&:focus {
@@ -35,7 +35,7 @@
 		transition: all 0.3s linear;
 
 		&:hover {
-			background-color: rgba(0, 0, 0, 0.3);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 		}
 	}
 }
@@ -83,7 +83,7 @@
 		}
 
 		&:hover {
-			background-color: rgba(0, 0, 0, 0.3);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 		}
 
 		&:focus {
