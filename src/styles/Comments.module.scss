@@ -1,6 +1,5 @@
 .commentBox {
 	width: 80vw;
-	margin-top: 20px;
 	display: flex;
 	flex-direction: column;
 
@@ -28,7 +27,7 @@
 	> .commentButton {
 		background-color: var(--backgroundColor);
 		border: 1px solid var(--detailsColor);
-		margin: 10px 0px 20px;
+		margin: 20px 0px 20px;
 		padding: 5px 20px;
 		font-size: 1.2rem;
 		align-self: flex-end;
