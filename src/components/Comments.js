@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from '../styles/Comments.module.scss';
 import useFetch from '../hooks/useFetch';
 import { formatDate } from './Helpers';
@@ -8,58 +8,63 @@ import Button from './Button';
 export default function Comments({ postId }) {
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
 	const { data, loading, fetchData } = useFetch(fetchUrl);
-	const [commentAreaValue, setCommentAreaValue] = useState(undefined);
+	const [textAreaValue, setTextAreaValue] = useState(undefined);
+	const textAreaRef = useRef();
 
-	const handleCommentAreaValueChange = (e) => {
-		setCommentAreaValue(e.target.value);
+	const handleTextAreaValueChange = (e) => {
+		setTextAreaValue(e.target.value);
 	};
 
-	const handleCommentButtonClick = (e) => {
+	const handlePostCommentButtonClick = (e) => {
 		e.preventDefault();
 
-		if (commentAreaValue) {
-			let newComment = {};
+		textAreaRef.current.focus();
 
-			newComment['comment'] = commentAreaValue;
-			newComment['postId'] = postId;
+		// if (commentAreaValue) {
+		// 	let newComment = {};
 
-			postComments(newComment);
-		}
+		// 	newComment['comment'] = commentAreaValue;
+		// 	newComment['postId'] = postId;
+
+		// 	postComments(newComment);
+		// }
 	};
 
-	const postComments = async (commentObject) => {
-		try {
-			const response = await fetch(fetchUrl, {
-				method: 'POST',
-				body: JSON.stringify(commentObject),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
+	// const postComments = async (commentObject) => {
+	// 	try {
+	// 		const response = await fetch(fetchUrl, {
+	// 			method: 'POST',
+	// 			body: JSON.stringify(commentObject),
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 		});
 
-			const result = await response.json();
+	// 		const result = await response.json();
 
-			if (result) {
-				fetchData();
-			}
-		} catch (err) {
-			console.log(`${err}. Try again later.`);
-		}
-	};
+	// 		if (result) {
+	// 			fetchData();
+	// 		}
+	// 	} catch (err) {
+	// 		console.log(`${err}. Try again later.`);
+	// 	}
+	// };
 
 	return (
 		<>
 			<div className={styles.commentBox}>
 				<textarea
 					className={styles.commentArea}
+					value={textAreaValue}
+					onChange={handleTextAreaValueChange}
+					ref={textAreaRef}
 					type="text"
 					name="commentArea"
 					placeholder="Leave a comment..."
 					rows="5"
-					onChange={handleCommentAreaValueChange}
 				/>
 
-				<Button onClick={handleCommentButtonClick}>Comentar</Button>
+				<Button onClick={handlePostCommentButtonClick}>Comentar</Button>
 			</div>
 
 			<div className={styles.divider} />
