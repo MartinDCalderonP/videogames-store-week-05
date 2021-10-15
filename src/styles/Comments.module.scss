@@ -71,6 +71,14 @@
 		> p {
 			&:first-child {
 				margin-bottom: 10px;
+				font-weight: bold;
+			}
+
+			> span {
+				margin-left: 5px;
+				color: gray;
+				font-weight: normal;
+				font-size: 0.9rem;
 			}
 		}
 

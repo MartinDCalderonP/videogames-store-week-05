@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../styles/Comments.module.scss';
 import useFetch from '../hooks/useFetch';
+import { formatDate } from './Helpers';
 import Spinner from './Spinner';
 
 export default function Comments({ postId }) {
-	const fetchUrl = `https://videogames-store-db.herokuapp.com/comments?postId=${postId}`;
+	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
 	const { data, loading, fetchData } = useFetch(fetchUrl);
 	const [commentAreaValue, setCommentAreaValue] = useState(undefined);
 
@@ -76,11 +77,17 @@ export default function Comments({ postId }) {
 					data?.length > 0 &&
 					data?.map((item) => (
 						<div key={`comment${item.id}`}>
-							<p>{item.comment}</p>
+							<p>
+								{`${item.user.firstName} ${item.user.lastName} `}
+								<span>{formatDate(item.created_at)}</span>
+							</p>
+							<p>{item.body}</p>
 						</div>
 					))}
 
-				{!loading && data?.length === 0 && <h3>There are no comments yet.</h3>}
+				{!loading && data?.length === 0 && (
+					<h3>There are no comments yet. Be the first!</h3>
+				)}
 			</div>
 		</>
 	);
