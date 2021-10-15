@@ -5,6 +5,7 @@ import { getNamesFromArray } from '../components/Helpers';
 import Spinner from '../components/Spinner';
 import PlatformIcons from '../components/PlatformIcons';
 import Comments from '../components/Comments';
+import defaultImage from '../img/gameDefault.png';
 
 export default function Detail({ postId }) {
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}`;
@@ -21,7 +22,10 @@ export default function Detail({ postId }) {
 					<div className={styles.row}>
 						<div className={styles.leftColumn}>
 							<div className={styles.image}>
-								<img src={data.cover_art.url} alt={data.name} />
+								<img
+									src={data.cover_art?.url || defaultImage}
+									alt={data.name}
+								/>
 							</div>
 						</div>
 
