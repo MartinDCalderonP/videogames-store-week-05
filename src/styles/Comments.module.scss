@@ -36,7 +36,6 @@
 
 .commentsContainer {
 	width: 80vw;
-	margin-bottom: 50px;
 	padding-top: 20px;
 
 	> * {
@@ -76,4 +75,10 @@
 			border-color: blue;
 		}
 	}
+}
+
+.goUpButtonContainer {
+	width: 80vw;
+	display: flex;
+	flex-direction: column;
 }
