@@ -9,7 +9,7 @@ export default function Home({ toDetail }) {
 	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games?_sort=release_year&_limit=8`;
 	const [fetchUrl, setFetchUrl] = useState(postsUrl);
 	const { data, loading } = useFetch(fetchUrl);
-	const [postsPerPage] = useState(8);
+	const postsPerPage = 8;
 
 	const handleToDetail = (postId) => {
 		toDetail(postId);

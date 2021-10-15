@@ -3,8 +3,7 @@ import styles from '../styles/PaginationButtons.module.scss';
 import useFetch from '../hooks/useFetch';
 
 export default function PaginationButtons({ postsPerPage, paginate }) {
-	const postsUrl = `https://trainee-gamerbox.herokuapp.com/games/count`;
-	const [fetchUrl] = useState(postsUrl);
+	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/count`;
 	const { data, loading } = useFetch(fetchUrl);
 
 	const pageNumbers = [];
