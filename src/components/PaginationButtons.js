@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import styles from '../styles/PaginationButtons.module.scss';
 import useFetch from '../hooks/useFetch';
+import { setPagesNumbers } from './Helpers';
 
 export default function PaginationButtons({ postsPerPage, paginate }) {
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/count`;
 	const { data, loading } = useFetch(fetchUrl);
 	const [currentPage, setCurrentPage] = useState(1);
-	const pageNumbers = [];
-
-	for (let i = 1; i <= Math.ceil(data / postsPerPage); i++) {
-		pageNumbers.push(i);
-	}
+	const pagesNumbers = setPagesNumbers(data, postsPerPage);
 
 	const handlePageButtonClick = (pageNumber) => {
 		paginate(pageNumber);
@@ -20,7 +17,7 @@ export default function PaginationButtons({ postsPerPage, paginate }) {
 	return (
 		<div className={styles.buttonsContainer}>
 			{!loading &&
-				pageNumbers?.map((pageNumber) => (
+				pagesNumbers?.map((pageNumber) => (
 					<button
 						className={
 							styles.pageButton +
