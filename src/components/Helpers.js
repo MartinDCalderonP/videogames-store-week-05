@@ -22,13 +22,3 @@ export const formatDate = (dateString) => {
 export const getNamesFromArray = (array) => {
 	return array?.map((item) => item.name).join(', ');
 };
-
-export const setPagesNumbers = (total, postsPerPage) => {
-	let pageNumbers = [];
-
-	for (let i = 1; i <= Math.ceil(total / postsPerPage); i++) {
-		pageNumbers.push(i);
-	}
-
-	return pageNumbers;
-};
