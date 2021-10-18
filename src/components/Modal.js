@@ -6,11 +6,11 @@ import CloseIcon from './CloseIcon';
 import Button from './Button';
 import Toast from './Toast';
 
-export default function Modal({ closeModal }) {
+export default function Modal({ closeModal, loggedUser }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [formData, setFormData] = useState('');
-	const { message } = useAuth(formData);
+	const { user, message } = useAuth(formData);
 
 	const handleCloseIconClick = () => {
 		closeModal(true);
@@ -32,6 +32,10 @@ export default function Modal({ closeModal }) {
 			password: password,
 		});
 	};
+
+	if (user) {
+		loggedUser(user);
+	}
 
 	return createPortal(
 		<div className={`${styles.overlay} ${styles.showModal}`}>

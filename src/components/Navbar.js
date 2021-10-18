@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import styles from '../styles/Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+	faHome,
+	faSignInAlt,
+	faUserCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
 
 export default function Navbar({ toHome }) {
+	const [user, setUser] = useState('');
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleHomeClick = () => {
@@ -15,8 +20,17 @@ export default function Navbar({ toHome }) {
 		setOpenModal(true);
 	};
 
+	const handleSignOutClick = () => {
+		setUser('');
+	};
+
 	const onCloseModal = () => {
 		setOpenModal(false);
+	};
+
+	const onLoggedUser = (loggedUser) => {
+		setOpenModal(false);
+		setUser(loggedUser);
 	};
 
 	return (
@@ -27,13 +41,22 @@ export default function Navbar({ toHome }) {
 					Home
 				</div>
 
-				<div onClick={handleSignInClick}>
-					Sign In
-					<FontAwesomeIcon className={styles.signIn} icon={faUserCircle} />
-				</div>
+				{!user ? (
+					<div onClick={handleSignInClick}>
+						Sign In
+						<FontAwesomeIcon className={styles.signIn} icon={faSignInAlt} />
+					</div>
+				) : (
+					<div onClick={handleSignOutClick}>
+						{user?.user?.firstName}
+						<FontAwesomeIcon className={styles.signIn} icon={faUserCircle} />
+					</div>
+				)}
 			</nav>
 
-			{openModal && <Modal closeModal={onCloseModal} />}
+			{openModal && (
+				<Modal closeModal={onCloseModal} loggedUser={onLoggedUser} />
+			)}
 		</>
 	);
 }
