@@ -10,7 +10,7 @@ export default function Comments({ postId, user }) {
 	const getCommentsUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
 	const postCommentUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comment`;
 	const { data, loading, fetchData } = useFetch(getCommentsUrl);
-	const [textAreaValue, setTextAreaValue] = useState(undefined);
+	const [textAreaValue, setTextAreaValue] = useState('');
 	const textAreaRef = useRef();
 	const [message, setMessage] = useState('');
 
