@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import usePrevious from './hooks/usePrevious';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
@@ -9,6 +10,7 @@ function App() {
 	const [page, setPage] = useState('home');
 	const [postId, setPostId] = useState(undefined);
 	const [user, setUser] = useState(null);
+	const previousPage = usePrevious(page);
 
 	useEffect(() => {
 		const storagedUser = localStorage.getItem('user');
@@ -18,8 +20,12 @@ function App() {
 		}
 	}, []);
 
-	const handleToHome = (home) => {
-		setPage(home);
+	const handleToHome = () => {
+		setPage('home');
+	};
+
+	const handlePreviousPage = () => {
+		setPage(previousPage);
 	};
 
 	const handleToDetail = (postId) => {
@@ -35,6 +41,7 @@ function App() {
 		<div className="App">
 			<Navbar
 				toHome={handleToHome}
+				previousPage={handlePreviousPage}
 				onLoggedUser={handleLoggedUser}
 				user={user}
 			/>

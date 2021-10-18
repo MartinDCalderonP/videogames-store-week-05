@@ -3,16 +3,21 @@ import styles from '../styles/Navbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faHome,
+	faArrowAltCircleLeft,
 	faSignInAlt,
 	faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
 
-export default function Navbar({ toHome, onLoggedUser, user }) {
+export default function Navbar({ toHome, previousPage, onLoggedUser, user }) {
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleHomeClick = () => {
-		toHome('home');
+		toHome(true);
+	};
+
+	const handlePreviousClick = () => {
+		previousPage(true);
 	};
 
 	const handleSignInClick = () => {
@@ -35,6 +40,14 @@ export default function Navbar({ toHome, onLoggedUser, user }) {
 	return (
 		<>
 			<nav className={styles.navbar}>
+				<div onClick={handlePreviousClick}>
+					<FontAwesomeIcon
+						className={styles.goBack}
+						icon={faArrowAltCircleLeft}
+					/>
+					Go Back
+				</div>
+
 				<div onClick={handleHomeClick}>
 					<FontAwesomeIcon className={styles.home} icon={faHome} />
 					Home
