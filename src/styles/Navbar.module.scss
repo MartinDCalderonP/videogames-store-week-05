@@ -1,19 +1,24 @@
 .navbar {
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 	background-color: var(--backgroundColor);
 	border-bottom: 1px solid var(--detailsColor);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	height: 50px;
+	font-size: 1.25rem;
 
 	> div {
-		width: 70px;
-		height: 30px;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		margin-left: 30px;
 		cursor: pointer;
+
+		.home {
+			margin: 0 15px 0 30px;
+		}
+
+		.signIn {
+			margin: 0 30px 0 15px;
+		}
 	}
 }
