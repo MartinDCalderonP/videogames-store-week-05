@@ -1,27 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Toast.module.scss';
 import CloseIcon from './CloseIcon';
 
-export default function Toast({ closeToast, children }) {
+export default function Toast({ children }) {
+	const [message, setMessage] = useState('');
+
 	useEffect(() => {
+		if (children) {
+			setMessage(children);
+		}
+
 		let interval = setInterval(() => {
-			closeToast(true);
+			setMessage('');
 		}, 5000);
 
 		return () => {
 			clearInterval(interval);
 		};
-	}, [closeToast]);
+	}, [children, setMessage]);
 
 	const handleCloseIconClick = () => {
-		closeToast(true);
+		setMessage('');
 	};
 
 	return (
-		<div className={`${styles.toast} ${styles.appearToast}`}>
-			{children}
+		<>
+			{message && (
+				<div className={`${styles.toast} ${styles.appearToast}`}>
+					{children}
 
-			<CloseIcon className={styles.closeIcon} onClick={handleCloseIconClick} />
-		</div>
+					<CloseIcon
+						className={styles.closeIcon}
+						onClick={handleCloseIconClick}
+					/>
+				</div>
+			)}
+		</>
 	);
 }
