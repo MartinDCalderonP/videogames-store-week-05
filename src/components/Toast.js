@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import styles from '../styles/Toast.module.scss';
 import CloseIcon from './CloseIcon';
 
@@ -23,7 +24,7 @@ export default function Toast({ children }) {
 		setMessage('');
 	};
 
-	return (
+	return createPortal(
 		<>
 			{message && (
 				<div className={`${styles.toast} ${styles.appearToast}`}>
@@ -35,6 +36,7 @@ export default function Toast({ children }) {
 					/>
 				</div>
 			)}
-		</>
+		</>,
+		document.getElementById('portal')
 	);
 }
