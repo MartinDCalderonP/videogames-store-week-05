@@ -11,7 +11,10 @@
 	background-color: var(--backgroundColor);
 	border: 1px solid darkblue;
 	border-radius: 5px;
-	padding: 10px 20px;
+	padding: 10px;
 	z-index: 100;
-	font-size: 1.2rem;
+
+	.closeIcon {
+		font-size: 1.2rem;
+	}
 }
