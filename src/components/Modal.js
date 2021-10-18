@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
+import useAuth from '../hooks/useAuth';
 import CloseIcon from './CloseIcon';
 import Button from './Button';
 import Toast from './Toast';
@@ -8,9 +9,8 @@ import Toast from './Toast';
 export default function Modal({ closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/auth/local`;
-	const [openToast, setOpenToast] = useState(false);
-	const [toastMessage, setToastMessage] = useState('');
+	const [formData, setFormData] = useState('');
+	const { message } = useAuth(formData);
 
 	const handleCloseIconClick = () => {
 		closeModal(true);
@@ -27,38 +27,10 @@ export default function Modal({ closeModal }) {
 	const handleSignInButton = async (e) => {
 		e.preventDefault();
 
-		let formData = {
+		setFormData({
 			identifier: username,
 			password: password,
-		};
-
-		try {
-			const response = await fetch(fetchUrl, {
-				method: 'POST',
-				body: JSON.stringify(formData),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-
-			const result = await response.json();
-
-			if (result.statusCode === 400) {
-				setToastMessage(result.message[0].messages[0].message);
-			} else {
-				setToastMessage(
-					`Welcome ${result.user.firstName} ${result.user.lastName}!`
-				);
-			}
-		} catch (err) {
-			setToastMessage(`${err}. Try again later.`);
-		}
-
-		setOpenToast(true);
-	};
-
-	const onCloseToast = () => {
-		setOpenToast(false);
+		});
 	};
 
 	return createPortal(
@@ -92,7 +64,7 @@ export default function Modal({ closeModal }) {
 				</form>
 			</div>
 
-			{openToast && <Toast closeToast={onCloseToast}>{toastMessage}</Toast>}
+			<Toast>{message}</Toast>
 		</div>,
 		document.getElementById('portal')
 	);
