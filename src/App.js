@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
@@ -8,6 +8,14 @@ function App() {
 	const [page, setPage] = useState('home');
 	const [postId, setPostId] = useState(undefined);
 	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		const storagedUser = localStorage.getItem('user');
+
+		if (storagedUser) {
+			setUser(JSON.parse(storagedUser));
+		}
+	}, []);
 
 	const handleToHome = (home) => {
 		setPage(home);

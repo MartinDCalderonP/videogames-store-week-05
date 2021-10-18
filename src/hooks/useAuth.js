@@ -21,6 +21,7 @@ const useAuth = (formData) => {
 							setMessage(result.message[0].messages[0].message);
 						} else {
 							setUser(result);
+							localStorage.setItem('user', JSON.stringify(result));
 						}
 					})
 					.catch((err) => setMessage(err));
