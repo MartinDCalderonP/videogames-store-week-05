@@ -13,7 +13,7 @@ const useFetch = (fetchUrl) => {
 				setData(result);
 				setLoading(false);
 			})
-			.catch((err) => console.log(`${err}. Try again later.`));
+			.catch((err) => alert(`${err}. Try again later.`));
 	}, [fetchUrl]);
 
 	useEffect(() => {

@@ -46,7 +46,7 @@ export default function Comments({ postId }) {
 	// 			fetchData();
 	// 		}
 	// 	} catch (err) {
-	// 		console.log(`${err}. Try again later.`);
+	// 		alert(`${err}. Try again later.`);
 	// 	}
 	// };
 
