@@ -1,8 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import CloseIcon from './CloseIcon';
 import Button from './Button';
 
 export default function Modal({ closeModal }) {
@@ -13,7 +12,11 @@ export default function Modal({ closeModal }) {
 	return createPortal(
 		<div className={`${styles.overlay} ${styles.showModal}`}>
 			<div className={styles.modal}>
-				<FontAwesomeIcon icon={faTimes} onClick={handleCloseIconClick} />
+				<CloseIcon
+					className={styles.modalClose}
+					onClick={handleCloseIconClick}
+				/>
+
 				<h1>Sign In</h1>
 
 				<form className={styles.signInForm}>
