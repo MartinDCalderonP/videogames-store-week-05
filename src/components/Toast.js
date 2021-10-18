@@ -8,7 +8,7 @@ export default function Toast({ closeToast, children }) {
 	};
 
 	return (
-		<div className={styles.toast}>
+		<div className={`${styles.toast} ${styles.appearToast}`}>
 			{children}
 
 			<CloseIcon className={styles.closeIcon} onClick={handleCloseIconClick} />
