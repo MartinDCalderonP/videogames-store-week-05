@@ -1,0 +1,17 @@
+.toast {
+	min-width: 25%;
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	transition: all 0.3s linear;
+	background-color: var(--backgroundColor);
+	border: 1px solid darkblue;
+	border-radius: 5px;
+	padding: 10px 20px;
+	z-index: 100;
+	font-size: 1.2rem;
+}
