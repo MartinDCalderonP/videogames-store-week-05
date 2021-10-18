@@ -52,18 +52,30 @@ export default function Comments({ postId, user }) {
 	return (
 		<>
 			<div className={styles.commentBox}>
-				<textarea
-					className={styles.commentArea}
-					value={textAreaValue}
-					onChange={handleTextAreaValueChange}
-					ref={textAreaRef}
-					type="text"
-					name="commentArea"
-					placeholder="Leave a comment..."
-					rows="5"
-				/>
+				{user ? (
+					<>
+						<textarea
+							className={styles.commentArea}
+							value={textAreaValue}
+							onChange={handleTextAreaValueChange}
+							ref={textAreaRef}
+							type="text"
+							name="commentArea"
+							placeholder="Leave a comment..."
+							rows="5"
+						/>
 
-				<Button onClick={handlePostCommentButtonClick}>Comentar</Button>
+						<Button onClick={handlePostCommentButtonClick}>
+							Add a Comment
+						</Button>
+					</>
+				) : (
+					<div>
+						<h2 className={styles.notLoggedText}>
+							You must be logged to add a comment.
+						</h2>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.divider} />
