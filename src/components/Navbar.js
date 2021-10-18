@@ -26,6 +26,7 @@ export default function Navbar({ toHome, previousPage, onLoggedUser, user }) {
 
 	const handleSignOutClick = () => {
 		onLoggedUser(null);
+		localStorage.removeItem('user');
 	};
 
 	const handleCloseModal = () => {
