@@ -7,7 +7,7 @@ import PlatformIcons from '../components/PlatformIcons';
 import Comments from '../components/Comments';
 import defaultImage from '../img/gameDefault.png';
 
-export default function Detail({ postId }) {
+export default function Detail({ postId, user }) {
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}`;
 	const { data, loading } = useFetch(fetchUrl);
 
@@ -57,7 +57,7 @@ export default function Detail({ postId }) {
 						</div>
 					</div>
 
-					<Comments postId={data.id} />
+					<Comments postId={data.id} user={user} />
 				</>
 			)}
 		</div>

@@ -4,12 +4,15 @@ import useFetch from '../hooks/useFetch';
 import { formatDate } from './Helpers';
 import Spinner from './Spinner';
 import Button from './Button';
+import Toast from './Toast';
 
-export default function Comments({ postId }) {
-	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
-	const { data, loading, fetchData } = useFetch(fetchUrl);
+export default function Comments({ postId, user }) {
+	const getCommentsUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comments`;
+	const postCommentUrl = `https://trainee-gamerbox.herokuapp.com/games/${postId}/comment`;
+	const { data, loading, fetchData } = useFetch(getCommentsUrl);
 	const [textAreaValue, setTextAreaValue] = useState(undefined);
 	const textAreaRef = useRef();
+	const [message, setMessage] = useState('');
 
 	const handleTextAreaValueChange = (e) => {
 		setTextAreaValue(e.target.value);
@@ -20,35 +23,31 @@ export default function Comments({ postId }) {
 
 		textAreaRef.current.focus();
 
-		// if (commentAreaValue) {
-		// 	let newComment = {};
+		if (textAreaValue) {
+			let newComment = {
+				body: textAreaValue,
+			};
 
-		// 	newComment['comment'] = commentAreaValue;
-		// 	newComment['postId'] = postId;
-
-		// 	postComments(newComment);
-		// }
+			postComments(newComment);
+		}
 	};
 
-	// const postComments = async (commentObject) => {
-	// 	try {
-	// 		const response = await fetch(fetchUrl, {
-	// 			method: 'POST',
-	// 			body: JSON.stringify(commentObject),
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 		});
-
-	// 		const result = await response.json();
-
-	// 		if (result) {
-	// 			fetchData();
-	// 		}
-	// 	} catch (err) {
-	// 		alert(`${err}. Try again later.`);
-	// 	}
-	// };
+	const postComments = (newComment) => {
+		fetch(postCommentUrl, {
+			method: 'POST',
+			body: JSON.stringify(newComment),
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${user.jwt}`,
+			},
+		})
+			.then((res) => res.json())
+			.then(() => {
+				fetchData();
+				setMessage('Comment successfully added');
+			})
+			.catch((err) => setMessage(err));
+	};
 
 	return (
 		<>
@@ -92,6 +91,8 @@ export default function Comments({ postId }) {
 					<h3>There are no comments yet. Be the first!</h3>
 				)}
 			</div>
+
+			<Toast>{message}</Toast>
 		</>
 	);
 }
