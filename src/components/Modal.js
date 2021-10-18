@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
 import CloseIcon from './CloseIcon';
 import Button from './Button';
 
 export default function Modal({ closeModal }) {
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/auth/local`;
 	const handleCloseIconClick = () => {
 		closeModal(true);
+	};
+
+	const handleUsernameChange = (e) => {
+		setUsername(e.target.value);
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
 	};
 
 	return createPortal(
