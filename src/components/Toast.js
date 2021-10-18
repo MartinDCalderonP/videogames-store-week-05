@@ -11,7 +11,7 @@ export default function Toast({ closeToast, children }) {
 		return () => {
 			clearInterval(interval);
 		};
-	}, []);
+	}, [closeToast]);
 
 	const handleCloseIconClick = () => {
 		closeToast(true);
