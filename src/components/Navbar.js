@@ -8,8 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Modal from './Modal';
 
-export default function Navbar({ toHome }) {
-	const [user, setUser] = useState('');
+export default function Navbar({ toHome, onLoggedUser, user }) {
 	const [openModal, setOpenModal] = useState(false);
 
 	const handleHomeClick = () => {
@@ -21,16 +20,16 @@ export default function Navbar({ toHome }) {
 	};
 
 	const handleSignOutClick = () => {
-		setUser('');
+		onLoggedUser(null);
 	};
 
-	const onCloseModal = () => {
+	const handleCloseModal = () => {
 		setOpenModal(false);
 	};
 
-	const onLoggedUser = (loggedUser) => {
+	const handleLoggedUser = (loggedUser) => {
+		onLoggedUser(loggedUser);
 		setOpenModal(false);
-		setUser(loggedUser);
 	};
 
 	return (
@@ -54,8 +53,8 @@ export default function Navbar({ toHome }) {
 				)}
 			</nav>
 
-			{openModal && (
-				<Modal closeModal={onCloseModal} loggedUser={onLoggedUser} />
+			{openModal && !user && (
+				<Modal closeModal={handleCloseModal} loggedUser={handleLoggedUser} />
 			)}
 		</>
 	);

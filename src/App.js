@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 function App() {
 	const [page, setPage] = useState('home');
 	const [postId, setPostId] = useState(undefined);
+	const [user, setUser] = useState(null);
 
 	const handleToHome = (home) => {
 		setPage(home);
@@ -17,13 +18,21 @@ function App() {
 		setPostId(postId);
 	};
 
+	const handleLoggedUser = (loggedUser) => {
+		setUser(loggedUser);
+	};
+
 	return (
 		<div className="App">
-			<Navbar toHome={handleToHome} />
+			<Navbar
+				toHome={handleToHome}
+				onLoggedUser={handleLoggedUser}
+				user={user}
+			/>
 
 			{page === 'home' && <Home toDetail={handleToDetail} />}
 
-			{page === 'detail' && <Detail postId={postId} />}
+			{page === 'detail' && <Detail postId={postId} user={user} />}
 
 			<Footer />
 		</div>
