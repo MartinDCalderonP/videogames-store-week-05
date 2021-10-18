@@ -3,11 +3,15 @@ import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
 import CloseIcon from './CloseIcon';
 import Button from './Button';
+import Toast from './Toast';
 
 export default function Modal({ closeModal }) {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const fetchUrl = `https://trainee-gamerbox.herokuapp.com/auth/local`;
+	const [openToast, setOpenToast] = useState(false);
+	const [toastMessage, setToastMessage] = useState('');
+
 	const handleCloseIconClick = () => {
 		closeModal(true);
 	};
@@ -48,6 +52,8 @@ export default function Modal({ closeModal }) {
 					<Button onClick={handleSignInButton}>Sign In</Button>
 				</form>
 			</div>
+
+			{openToast && <Toast closeToast={onCloseToast}>{toastMessage}</Toast>}
 		</div>,
 		document.getElementById('portal')
 	);
