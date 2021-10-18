@@ -16,10 +16,23 @@ export default function Modal({ closeModal }) {
 				<FontAwesomeIcon icon={faTimes} onClick={handleCloseIconClick} />
 				<h1>Sign In</h1>
 
-				<input type="text" placeholder="Email"></input>
-				<input type="text" placeholder="Password"></input>
+				<form className={styles.signInForm}>
+					<input
+						value={username}
+						onChange={handleUsernameChange}
+						type="text"
+						placeholder="Username"
+					/>
 
-				<Button className={styles.signInButton}>Sign In</Button>
+					<input
+						value={password}
+						onChange={handlePasswordChange}
+						type="text"
+						placeholder="Password"
+					/>
+
+					<Button onClick={handleSignInButton}>Sign In</Button>
+				</form>
 			</div>
 		</div>,
 		document.getElementById('portal')
