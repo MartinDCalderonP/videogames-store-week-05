@@ -76,13 +76,15 @@ export default function Modal({ closeModal }) {
 						value={username}
 						onChange={handleUsernameChange}
 						type="text"
+						name="Username"
 						placeholder="Username"
 					/>
 
 					<input
 						value={password}
 						onChange={handlePasswordChange}
-						type="text"
+						type="password"
+						name="Password"
 						placeholder="Password"
 					/>
 
