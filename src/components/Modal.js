@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Modal.module.scss';
 import useAuth from '../hooks/useAuth';
@@ -12,6 +12,12 @@ export default function Modal({ closeModal, loggedUser }) {
 	const [formData, setFormData] = useState('');
 	const { user, message } = useAuth(formData);
 	const [openToast, setOpenToast] = useState(false);
+
+	useEffect(() => {
+		if (user) {
+			loggedUser(user);
+		}
+	}, [user]);
 
 	const handleCloseIconClick = () => {
 		closeModal(true);
@@ -40,9 +46,6 @@ export default function Modal({ closeModal, loggedUser }) {
 		setOpenToast(false);
 	};
 
-	if (user) {
-		loggedUser(user);
-	}
 	return createPortal(
 		<div className={`${styles.overlay} ${styles.showModal}`}>
 			<div className={styles.modal}>
