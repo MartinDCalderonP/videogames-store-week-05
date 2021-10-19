@@ -52,7 +52,12 @@ export default function Detail({ postId, user }) {
 									</p>
 								)}
 
-								<PlatformIcons platforms={data.platforms} />
+								{data?.platforms.length > 0 && (
+									<p>
+										<b>Platoforms: </b>
+										{getNamesFromArray(data.platforms)}
+									</p>
+								)}
 							</div>
 						</div>
 					</div>
