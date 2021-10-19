@@ -3,7 +3,6 @@ import styles from '../styles/Detail.module.scss';
 import useFetch from '../hooks/useFetch';
 import { getNamesFromArray } from '../components/Helpers';
 import Spinner from '../components/Spinner';
-import PlatformIcons from '../components/PlatformIcons';
 import Comments from '../components/Comments';
 import defaultImage from '../img/gameDefault.png';
 
