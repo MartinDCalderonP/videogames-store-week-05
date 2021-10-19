@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from '../styles/Toast.module.scss';
 import CloseIcon from './CloseIcon';
 
-export default function Toast({ children }) {
-	const [message, setMessage] = useState('');
-
+export default function Toast({ children, closeToast }) {
 	useEffect(() => {
-		if (children) {
-			setMessage(children);
-		}
-
 		let interval = setInterval(() => {
-			setMessage('');
+			closeToast(true);
 		}, 5000);
 
 		return () => {
 			clearInterval(interval);
 		};
-	}, [children, setMessage]);
+	}, [children]);
 
 	const handleCloseIconClick = () => {
-		setMessage('');
+		closeToast(true);
 	};
 
 	return createPortal(
-		<>
-			{message && (
-				<div className={`${styles.toast} ${styles.appearToast}`}>
-					{children}
+		<div className={`${styles.toast} ${styles.appearToast}`}>
+			{children}
 
-					<CloseIcon
-						className={styles.closeIcon}
-						onClick={handleCloseIconClick}
-					/>
-				</div>
-			)}
-		</>,
+			<CloseIcon className={styles.closeIcon} onClick={handleCloseIconClick} />
+		</div>,
 		document.getElementById('portal')
 	);
 }

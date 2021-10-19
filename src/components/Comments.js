@@ -12,6 +12,7 @@ export default function Comments({ postId, user }) {
 	const { data, loading, fetchData } = useFetch(getCommentsUrl);
 	const [textAreaValue, setTextAreaValue] = useState('');
 	const textAreaRef = useRef();
+	const [openToast, setOpenToast] = useState(false);
 	const [message, setMessage] = useState('');
 
 	const handleTextAreaValueChange = (e) => {
@@ -47,6 +48,12 @@ export default function Comments({ postId, user }) {
 				setMessage('Comment successfully added');
 			})
 			.catch((err) => setMessage(err));
+
+		setOpenToast(true);
+	};
+
+	const handleCloseToast = () => {
+		setOpenToast(false);
 	};
 
 	return (
@@ -104,7 +111,9 @@ export default function Comments({ postId, user }) {
 				)}
 			</div>
 
-			<Toast>{message}</Toast>
+			{openToast && message && (
+				<Toast closeToast={handleCloseToast}>{message}</Toast>
+			)}
 		</>
 	);
 }

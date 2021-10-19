@@ -11,6 +11,7 @@ export default function Modal({ closeModal, loggedUser }) {
 	const [password, setPassword] = useState('');
 	const [formData, setFormData] = useState('');
 	const { user, message } = useAuth(formData);
+	const [openToast, setOpenToast] = useState(false);
 
 	const handleCloseIconClick = () => {
 		closeModal(true);
@@ -31,12 +32,17 @@ export default function Modal({ closeModal, loggedUser }) {
 			identifier: username,
 			password: password,
 		});
+
+		setOpenToast(true);
+	};
+
+	const handleCloseToast = () => {
+		setOpenToast(false);
 	};
 
 	if (user) {
 		loggedUser(user);
 	}
-
 	return createPortal(
 		<div className={`${styles.overlay} ${styles.showModal}`}>
 			<div className={styles.modal}>
@@ -68,7 +74,9 @@ export default function Modal({ closeModal, loggedUser }) {
 				</form>
 			</div>
 
-			<Toast>{message}</Toast>
+			{openToast && message && (
+				<Toast closeToast={handleCloseToast}>{message}</Toast>
+			)}
 		</div>,
 		document.getElementById('portal')
 	);
